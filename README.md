@@ -1,5 +1,5 @@
 # How Transferable are Attribute Controllers on Pretrained Multilingual Translation Models?
-Implementation for [paper]() with the same title.
+Implementation for [paper](https://arxiv.org/abs/2309.08565) with the same title.
 
 ## Introduction
 Our implementation is based on the [nllb branch](https://github.com/facebookresearch/fairseq/tree/nllb) of Fairseq.
