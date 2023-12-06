@@ -27,7 +27,7 @@ The test data are from the [IWSLT 2023 formality control task](https://github.co
 The training data come from the en-es [adaptation set](https://github.com/DCSaunders/tagged-gender-coref#adaptation-sets) by Saunders et al. (2020). 
 
 #### Evaluation
-For evaluate we use the [MuST-SHE](https://aclanthology.org/2020.acl-main.619.pdf) test set.
+For evaluatation we use the [MuST-SHE](https://aclanthology.org/2020.acl-main.619.pdf) test set.
 
 The dataset provides en-{es, it, fr} data as well multiway aligned data. 
 

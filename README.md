@@ -10,11 +10,33 @@ Our main implementation is in
 `./fairseq-nllb/examples/classifier_guidance` and 
 `./fairseq-nllb/fairseq/sequence_generator_classifier_guidance.py`.
 
+## Models
+
+## Trained Models
+
+| Control Task       | Approach   | Trained on           | Link                                                           |
+|--------------------|------------|----------------------|----------------------------------------------------------------|
+| Grammatical gender | Finetuning | en->es               | [feminine](https://bwsyncandshare.kit.edu/s/oiBFfXnr8jXKS2D), [masculine](https://bwsyncandshare.kit.edu/s/3RRyLEXKEtmaqPT) | 
+| Formality          | Finetuning | en->{de,es,fr,hi,it} | [formal](), [informal]()|
+(_More models to be uploaded soon_)
+
 ## Data and Preprocessing
 Please see [here](./data_prepro.md).
 
-## Training
+## Preparing Pretrained Model
 We initialize from the NLLB-200 [distilled 600M model](https://github.com/facebookresearch/fairseq/tree/nllb#multilingual-translation-models).
+
+Download and unpack model:
+```bash
+MODEL_FOLDER=# define path to store pretrained models, e.g. $HOME/projects/nllb/model
+cd $MODEL_FOLDER 
+wget https://tinyurl.com/nllb200densedst600mcheckpoint  # model checkpoint
+wget https://tinyurl.com/flores200sacrebleuspm  # sentencepiece model
+wget https://tinyurl.com/nllb200dictionary  # dictionary
+wget https://raw.githubusercontent.com/dannigt/attribute-controller-transfer/main/data/langs.txt  # language list
+```
+
+## Training
 
 ### Finetuning
 Finetune on attribute-specific data:
@@ -202,8 +224,7 @@ The script for decoding NLLB out of the box or a finetuned NLLB share the same s
 <summary><b> Decoding script </b></summary>
 
 ```bash
-fairseq_dir=$HOME/src/fairseq
-MODEL_FOLDER=$HOME/projects/nllb/model 
+MODEL_FOLDER= #as described earlier in "Preparing Pretrained Model", e.g. $HOME/projects/nllb/model 
 ckpt_name="nllb200densedst600mcheckpoint"
 ckpt=$MODEL_FOLDER/$ckpt_name
 spm_name="flores200sacrebleuspm"
@@ -230,7 +251,7 @@ CUDA_VISIBLE_DEVICES=$GPUS fairseq-interactive ./ \
 --langs $(cat $lang_list) \
 --fp16 \
 --lang-pairs $sl-$tl \
---add-data-source-prefix-tags 2>&1 | tee $OUTPUT_DIR/$p.$sl-$tl.pred.log
+--add-data-source-prefix-tags 2>&1
 
 done
 done
@@ -271,7 +292,7 @@ CUDA_VISIBLE_DEVICES=0 fairseq-interactive ./ \
 --decoder-langtok --encoder-langtok src \
 --langs $(cat $lang_list) \
 --fp16 \
---lang-pairs $sl-$tl --add-data-source-prefix-tags 2>&1 | tee $OUTPUT_DIR/$p$domain.$sl-$tl.pred.log
+--lang-pairs $sl-$tl --add-data-source-prefix-tags 2>&1
 ```
 </details>
 
