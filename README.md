@@ -225,7 +225,7 @@ The script for decoding NLLB out of the box or a finetuned NLLB share the same s
 
 ```bash
 MODEL_FOLDER= #as described earlier in "Preparing Pretrained Model", e.g. $HOME/projects/nllb/model 
-ckpt_name="nllb200densedst600mcheckpoint"
+ckpt_name="nllb200densedst600mcheckpoint" # or replace by finetuned model
 ckpt=$MODEL_FOLDER/$ckpt_name
 spm_name="flores200sacrebleuspm"
 dict=$MODEL_FOLDER/nllb200dictionary
@@ -251,7 +251,7 @@ CUDA_VISIBLE_DEVICES=$GPUS fairseq-interactive ./ \
 --langs $(cat $lang_list) \
 --fp16 \
 --lang-pairs $sl-$tl \
---add-data-source-prefix-tags 2>&1
+--add-data-source-prefix-tags
 
 done
 done
@@ -292,7 +292,7 @@ CUDA_VISIBLE_DEVICES=0 fairseq-interactive ./ \
 --decoder-langtok --encoder-langtok src \
 --langs $(cat $lang_list) \
 --fp16 \
---lang-pairs $sl-$tl --add-data-source-prefix-tags 2>&1
+--lang-pairs $sl-$tl --add-data-source-prefix-tags
 ```
 </details>
 
