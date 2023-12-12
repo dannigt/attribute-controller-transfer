@@ -235,7 +235,7 @@ GPUS=0
 inputf=# input file, w/ input sentences line by line
 
 for sl in eng_Latn; do
-for lang in deu_Latn; do
+for tl in deu_Latn; do
 
 cat $inputf | spm_encode --model $MODEL_FOLDER/$spm_name | \
 CUDA_VISIBLE_DEVICES=$GPUS fairseq-interactive ./ \
@@ -251,7 +251,9 @@ CUDA_VISIBLE_DEVICES=$GPUS fairseq-interactive ./ \
 --langs $(cat $lang_list) \
 --fp16 \
 --lang-pairs $sl-$tl \
---add-data-source-prefix-tags
+--add-data-source-prefix-tags | tee ./output.log
+
+grep ^H  ./output.log | cut -f3- > ./output.sys
 
 done
 done
