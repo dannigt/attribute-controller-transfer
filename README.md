@@ -17,7 +17,7 @@ Our main implementation is in
 | Control Task       | Approach   | Trained on           | Link                                                           |
 |--------------------|------------|----------------------|----------------------------------------------------------------|
 | Grammatical gender | Finetuning | en->es               | [feminine](https://bwsyncandshare.kit.edu/s/oiBFfXnr8jXKS2D), [masculine](https://bwsyncandshare.kit.edu/s/3RRyLEXKEtmaqPT) | 
-| Formality          | Finetuning | en->{de,es,fr,hi,it} | [formal](), [informal]()|
+| Formality          | Finetuning | en->{de,es,fr,hi,it} | [formal](), [informal](https://bwsyncandshare.kit.edu/s/iaDH7sAmsjXgKpg)|
 (_More models to be uploaded soon_)
 
 ## Data and Preprocessing
